@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:auto_route_deeplinking/routing/router.gr.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -5,19 +7,30 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter Demo Home Page'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'Home view',
+    return AutoTabsScaffold(
+      routes: const [
+        DashboardRouter(),
+        UsersRouter(),
+      ],
+      bottomNavigationBuilder: (_, tabsRouter) {
+        return BottomNavigationBar(
+          currentIndex: tabsRouter.activeIndex,
+          onTap: tabsRouter.setActiveIndex,
+          items: const [
+            BottomNavigationBarItem(
+              label: 'Dashboard',
+              icon: Icon(Icons.filter_outlined),
             ),
+            BottomNavigationBarItem(
+              label: 'Users',
+              icon: Icon(Icons.verified_user_sharp),
+            )
           ],
-        ),
+        );
+      },
+      appBarBuilder: (_, tabsRouter) => AppBar(
+        leading: const AutoLeadingButton(),
+        centerTitle: true,
       ),
     );
   }
