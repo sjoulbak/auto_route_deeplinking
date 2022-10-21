@@ -1,16 +1,18 @@
-# auto_route_deeplinking
+# Auto Route Scenario with Deep Linking
 
-A new Flutter project.
+A question project for Auto Route.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Install the correct version of Flutter with `asdf install`
+2. Install the dependencies with `flutter pub get`
+3. Start your iOS/Android emulator
+4. Launch the project either with vscode debugging or `flutter run`
 
-A few resources to get you started if this is your first Flutter project:
+The scenario:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Without clicking through the app, execute:
+- Android: `adb shell am start -d whooff://whooff.nl/users/user`
+- iOS: `xcrun simctl openurl booted whooff://whooff.nl/users/user`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Expected outcome is to have the UsersView loaded with UserView as its child with a back button to the UsersView. Unfortunately the deep linking does not work like that, since our Router structure is not defined like that. We want to think of a solution (hopefully within auto_route) to get the expected outcome.
