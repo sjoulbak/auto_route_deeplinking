@@ -11,7 +11,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerDelegate: _router.delegate(),
-      routeInformationParser: _router.defaultRouteParser(),
+      routeInformationParser: _router.defaultRouteParser(
+        includePrefixMatches: true,
+      ),
     );
   }
 }
